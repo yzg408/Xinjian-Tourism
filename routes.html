@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>珠链新游 — 定制你的新建之旅 · 新建大观</title>
+  <meta name="description" content="一键定制新建区全域游览路线，历史控/亲子游/户外党都能找到属于自己的新建之旅。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🏛️</span>
+      新建大观
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="routes.html" class="active">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html">沉浸新境</a>
+      <a href="explore.html">风向新标</a>
+    </nav>
+    <div class="nav-overlay"></div>
+    <button class="menu-toggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero gold-bg">
+  <div class="breadcrumb">
+    <a href="index.html">首页</a> <span>/</span> <span>珠链新游</span>
+  </div>
+  <h1>🗺️ 珠链新游</h1>
+  <p>打破壁垒，将散落的景区串珠成链。选择你的兴趣标签，智能推荐专属路线。</p>
+</section>
+
+<!-- Route Builder -->
+<section class="section">
+  <div class="section-title animate-in">
+    <h2>🎯 点击你的兴趣标签</h2>
+    <p>多选，系统将为你智能匹配最佳路线</p>
+  </div>
+
+  <div class="tag-selector">
+    <button class="tag-btn active" data-tag="历史">🏛️ 历史控</button>
+    <button class="tag-btn" data-tag="亲子">👨‍👩‍👧 亲子游</button>
+    <button class="tag-btn" data-tag="户外">🏔️ 户外党</button>
+    <button class="tag-btn" data-tag="文化">📖 文化迷</button>
+    <button class="tag-btn" data-tag="自然">🌿 自然派</button>
+    <button class="tag-btn" data-tag="汉韵">🎎 汉韵粉</button>
+    <button class="tag-btn" data-tag="摄影">📷 摄影咖</button>
+    <button class="tag-btn" data-tag="祈福">🙏 祈福客</button>
+  </div>
+
+  <div class="recommended-routes route-grid">
+    <!-- JS renders here -->
+  </div>
+
+  <div class="ticket-card animate-in">
+    <h3>🎫 新建旅游一卡通</h3>
+    <p>一卡畅游新建联盟景区，享受联票折扣，客源互送</p>
+    <div class="price">¥199 <small>起/年</small></div>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <button class="btn btn-primary" style="background: #fff; color: var(--gold-dark);">立即购买</button>
+      <button class="btn btn-outline" style="border-color: rgba(255,255,255,0.4);">了解详情</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>🏛️ 新建大观</h3>
+      <p>新建区全域智慧文旅平台<br>一眼越千年，一城揽新建</p>
+    </div>
+    <div class="footer-links">
+      <h4>探索</h4>
+      <a href="routes.html">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html">沉浸新境</a>
+      <a href="explore.html">风向新标</a>
+    </div>
+    <div class="footer-links">
+      <h4>服务</h4>
+      <a href="#">一卡通购买</a>
+      <a href="#">交通接驳</a>
+      <a href="#">游客咨询</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 新建大观 · 全域智慧文旅平台</span>
+    <span>⚡ 星月神话工作室 出品</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Initial render with "历史" tag active
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.recommended-routes');
+    // Render all routes initially since "历史" is active by default
+    const matched = window.routeData.filter(r => r.tags.includes('历史'));
+    renderRoutes(container, matched.length > 0 ? matched : window.routeData);
+  });
+</script>
+</body>
+</html>

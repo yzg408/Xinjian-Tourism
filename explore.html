@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>风向新标 — KOL种草·智慧服务 · 新建大观</title>
+  <meta name="description" content="KOL游玩攻略、智慧管家、交通接驳、实时客流——新建文旅的风向标。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .smart-section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: var(--space-md);
+    }
+    .smart-section h3 {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .traffic-route {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .traffic-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      background: var(--bg-cream);
+      border-radius: var(--radius-sm);
+    }
+    .traffic-item .ti-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .traffic-item .ti-detail {
+      flex: 1;
+    }
+    .traffic-item .ti-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .traffic-item .ti-time {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+    }
+    .traffic-item .ti-badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+    }
+    .urgent-section {
+      background: linear-gradient(135deg, #FEE2E2, #FEF2F2);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px solid #FECACA;
+      margin-top: 1rem;
+    }
+    .urgent-section .urgent-icon {
+      width: 56px;
+      height: 56px;
+      background: #EF4444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .urgent-section .urgent-text h4 {
+      color: #991B1B;
+      margin-bottom: 0.2rem;
+    }
+    .urgent-section .urgent-text p {
+      font-size: 0.85rem;
+      color: #7F1D1D;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🏛️</span>
+      新建大观
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="routes.html">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html">沉浸新境</a>
+      <a href="explore.html" class="active">风向新标</a>
+    </nav>
+    <div class="nav-overlay"></div>
+    <button class="menu-toggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero blue-bg">
+  <div class="breadcrumb">
+    <a href="index.html">首页</a> <span>/</span> <span>风向新标</span>
+  </div>
+  <h1>📱 风向新标</h1>
+  <p>跨界营销 × 智慧服务——用年轻人的视角种草新建，用数字技术守护每一段旅程</p>
+</section>
+
+<div class="page-inner-nav">
+  <a href="#kol">📸 体验官日志</a>
+  <a href="#traffic">🚌 智慧管家</a>
+</div>
+
+<!-- ====== KOL 体验官日志 ====== -->
+<section class="section" id="kol">
+  <div class="section-title animate-in">
+    <h2>📸 体验官日志</h2>
+    <p>跟着达人玩新建——用年轻人的视角「种草」不一样的南昌</p>
+  </div>
+
+  <div class="kol-grid">
+    <div class="kol-card animate-in">
+      <div class="kol-header">
+        <div class="kol-avatar" style="background: linear-gradient(135deg, #C9A84C, #E8D5A3);">📸</div>
+        <div class="kol-info">
+          <div class="kol-name">@旅行的意义</div>
+          <div class="kol-source">🐦 小红书 · 10.2w粉丝</div>
+        </div>
+      </div>
+      <div class="kol-body">
+        <p>「南昌新建这个小众秘境惊艳到我了！海昏侯博物馆的金器太震撼了，马蹄金blingbling✨ 下午去南矶山看了候鸟，夕阳下成群的白鹤飞过芦苇荡……晚上在厚田沙漠露营看了星空银河🌌 两天一夜，人均才300+，强烈安利！」</p>
+        <div class="kol-tags">
+          <span class="kol-tag">#南昌旅游</span>
+          <span class="kol-tag">#海昏侯</span>
+          <span class="kol-tag">#小众打卡</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kol-card animate-in">
+      <div class="kol-header">
+        <div class="kol-avatar" style="background: linear-gradient(135deg, #2E86AB, #6BB8D4);">🎎</div>
+        <div class="kol-info">
+          <div class="kol-name">@汉服少女小橘</div>
+          <div class="kol-source">📺 抖音 · 25.6w粉丝</div>
+        </div>
+      </div>
+      <div class="kol-body">
+        <p>「穿汉服去海昏侯拍了一组大片！博物馆的汉代展厅和汉服简直绝配👘 尤其是那个雁鱼灯的背景，拍出了央视纪录片的感觉🎬 还去了汪山土库，百年古宅配齐胸襦裙，穿越感拉满！强烈建议姐妹们带两套汉服去换着拍～」</p>
+        <div class="kol-tags">
+          <span class="kol-tag">#汉服拍照</span>
+          <span class="kol-tag">#海昏侯</span>
+          <span class="kol-tag">#国风</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kol-card animate-in">
+      <div class="kol-header">
+        <div class="kol-avatar" style="background: linear-gradient(135deg, #E8734A, #F5A78A);">🏕️</div>
+        <div class="kol-info">
+          <div class="kol-name">@户外老张</div>
+          <div class="kol-source">🎬 B站 · 8.4w粉丝</div>
+        </div>
+      </div>
+      <div class="kol-body">
+        <p>「厚田沙漠越野太爽了🏜️ 在南昌就能体验到沙漠激情！ATV越野车在沙丘上飞驰，肾上腺素飙升🔥 晚上还有篝火晚会和星空露营，帐篷条件比想象的好，有热水洗澡。星空无敌了，用手机都能拍到银河🌌 建议带长焦镜头拍沙丘纹理。」</p>
+        <div class="kol-tags">
+          <span class="kol-tag">#户外越野</span>
+          <span class="kol-tag">#星空露营</span>
+          <span class="kol-tag">#沙漠</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kol-card animate-in">
+      <div class="kol-header">
+        <div class="kol-avatar" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">🍜</div>
+        <div class="kol-info">
+          <div class="kol-name">@南昌美食地图</div>
+          <div class="kol-source">🐦 小红书 · 5.8w粉丝</div>
+        </div>
+      </div>
+      <div class="kol-body">
+        <p>「新建美食探店合集来啦！🍖 大塘东坡肉——肥而不腻，入口即化，据说是苏东坡当年路过时留下的配方。🐟 鄱阳湖鱼头煲——鲜到眉毛掉下来！还有万寿宫夜市的各种小吃，南昌拌粉、瓦罐汤、白糖糕……每一样都好吃到跺脚！赶紧码住！」</p>
+        <div class="kol-tags">
+          <span class="kol-tag">#南昌美食</span>
+          <span class="kol-tag">#探店</span>
+          <span class="kol-tag">#赣菜</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: var(--space-lg);" class="animate-in">
+    <p style="color: var(--text-mid); margin-bottom: 1rem;">📝 你也想成为新建体验官？上传你的游记，优质内容奖励景区门票！</p>
+    <a href="#" class="btn btn-primary">📤 投稿我的游记</a>
+  </div>
+</section>
+
+<!-- ====== 智慧管家 ====== -->
+<section class="section section-alt" id="traffic">
+  <div class="section-title animate-in">
+    <h2>🚌 智慧管家</h2>
+    <p>从出发到返程，智慧服务全程陪伴</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+    <!-- 交通接驳 -->
+    <div class="smart-section animate-in">
+      <h3>🚍 交通接驳</h3>
+      <div class="traffic-route">
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(46,134,171,0.12);">🚄</div>
+          <div class="ti-detail">
+            <div class="ti-name">南昌西站 → 海昏侯遗址</div>
+            <div class="ti-time">高铁巴士3号线 · 约40分钟</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(46,134,171,0.1); color: var(--blue);">🚌 直达</span>
+        </div>
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(46,134,171,0.12);">✈️</div>
+          <div class="ti-detail">
+            <div class="ti-name">昌北机场 → 新建城区</div>
+            <div class="ti-time">机场巴士4号线 · 约30分钟</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(46,134,171,0.1); color: var(--blue);">🚌 直达</span>
+        </div>
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(46,134,171,0.12);">🚇</div>
+          <div class="ti-detail">
+            <div class="ti-name">南昌市区 → 厚田沙漠</div>
+            <div class="ti-time">地铁2号线→转118路 · 约1h</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(201,168,76,0.1); color: var(--gold-dark);">🔄 换乘</span>
+        </div>
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(46,134,171,0.12);">🚌</div>
+          <div class="ti-detail">
+            <div class="ti-name">新建景区直通车</div>
+            <div class="ti-time">串联主要景区·每日8:00-18:00</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(46,134,171,0.1); color: var(--blue);">🎫 免费</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 实时信息 -->
+    <div class="smart-section animate-in">
+      <h3>📍 实时信息</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="background: var(--bg-cream); border-radius: var(--radius-md); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 500;">海昏侯国遗址公园</div>
+            <div style="font-size: 0.85rem; color: var(--text-mid);">停车场余位 · 厕所排队</div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="padding: 0.2rem 0.6rem; background: rgba(34,197,94,0.1); color: #16A34A; border-radius: 50px; font-size: 0.75rem;">🅿️ 126位</span>
+            <span style="padding: 0.2rem 0.6rem; background: rgba(234,179,8,0.1); color: #CA8A04; border-radius: 50px; font-size: 0.75rem;">🚻 少量</span>
+          </div>
+        </div>
+        <div style="background: var(--bg-cream); border-radius: var(--radius-md); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 500;">南矶山湿地公园</div>
+            <div style="font-size: 0.85rem; color: var(--text-mid);">停车场余位 · 观鸟台人数</div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="padding: 0.2rem 0.6rem; background: rgba(34,197,94,0.1); color: #16A34A; border-radius: 50px; font-size: 0.75rem;">🅿️ 85位</span>
+            <span style="padding: 0.2rem 0.6rem; background: rgba(34,197,94,0.1); color: #16A34A; border-radius: 50px; font-size: 0.75rem;">👥 适宜</span>
+          </div>
+        </div>
+        <div style="background: var(--bg-cream); border-radius: var(--radius-md); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 500;">厚田沙漠景区</div>
+            <div style="font-size: 0.85rem; color: var(--text-mid);">停车场余位 · 景区人流</div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <span style="padding: 0.2rem 0.6rem; background: rgba(234,179,8,0.1); color: #CA8A04; border-radius: 50px; font-size: 0.75rem;">🅿️ 32位</span>
+            <span style="padding: 0.2rem 0.6rem; background: rgba(239,68,68,0.1); color: #DC2626; border-radius: 50px; font-size: 0.75rem;">👥 拥挤</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOS 一键救援 -->
+  <div class="urgent-section animate-in">
+    <div class="urgent-icon">🆘</div>
+    <div class="urgent-text">
+      <h4>SOS 一键救援</h4>
+      <p>如遇紧急情况，点击下方按钮即可一键联系新建区文旅应急指挥中心。<br>
+      24小时值守电话：0791-XXXXXXXX</p>
+      <a href="#" class="btn" style="background: #EF4444; color: #fff; padding: 0.6rem 1.5rem; font-size: 0.85rem; margin-top: 0.5rem;">
+        🆘 一键求助
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>🏛️ 新建大观</h3>
+      <p>新建区全域智慧文旅平台</p>
+    </div>
+    <div class="footer-links">
+      <h4>探索</h4>
+      <a href="routes.html">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html">沉浸新境</a>
+      <a href="explore.html">风向新标</a>
+    </div>
+    <div class="footer-links">
+      <h4>服务</h4>
+      <a href="#">一卡通购买</a>
+      <a href="#">交通接驳</a>
+      <a href="#">游客咨询</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 新建大观 · 全域智慧文旅平台</span>
+    <span>⚡ 星月神话工作室 出品</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

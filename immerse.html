@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>沉浸新境 — 剧本游·文创·夜游 · 新建大观</title>
+  <meta name="description" content="汪山土库实景剧本杀、海昏侯文创、夜新建地图——沉浸式玩转新建。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .script-preview {
+      background: linear-gradient(135deg, #2d1b69, #1a1a2e);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .script-preview::before {
+      content: '🎭';
+      position: absolute;
+      right: -2rem;
+      bottom: -2rem;
+      font-size: 12rem;
+      opacity: 0.05;
+    }
+    .script-characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .script-char {
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .script-char:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+    .script-char .char-icon {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+    .script-char .char-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .script-char .char-desc {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139,92,246,0.4);
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🏛️</span>
+      新建大观
+    </a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="routes.html">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html" class="active">沉浸新境</a>
+      <a href="explore.html">风向新标</a>
+    </nav>
+    <div class="nav-overlay"></div>
+    <button class="menu-toggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(45,27,105,0.04));">
+  <div class="breadcrumb">
+    <a href="index.html">首页</a> <span>/</span> <span>沉浸新境</span>
+  </div>
+  <h1>🎭 沉浸新境</h1>
+  <p>创新场景，大力发展沉浸式互动文旅——让每一段旅程都是一场穿越</p>
+</div>
+</section>
+
+<div class="page-inner-nav">
+  <a href="#script">🎭 实景剧本杀</a>
+  <a href="#shop">🛍️ 新建好物</a>
+  <a href="#night">🌃 夜新建地图</a>
+</div>
+
+<!-- ====== 实景剧本杀 ====== -->
+<section class="section" id="script">
+  <div class="section-title animate-in">
+    <h2>🎭 汪山土库 · 《程府风云》</h2>
+    <p>百年赣派古宅 × 沉浸式实景剧本杀</p>
+  </div>
+
+  <div class="script-preview animate-in">
+    <div style="position: relative; z-index: 1;">
+      <h3 style="margin-bottom: 0.5rem;">🏘️ 程府风云 · 剧本介绍</h3>
+      <p style="opacity: 0.75; max-width: 700px; margin-bottom: 1.5rem;">
+        清末民初，赣派豪门程府迎来百年诞辰。一封匿名信悄然出现在老太爷的书房——
+        「程家百年基业，暗藏一桩沉冤。今夜子时，正堂相见。」
+        六位各怀心思的宾客，三段跨越三十年的恩怨，一座藏着无数秘密的百年古宅。
+        真相，等你来揭开。
+      </p>
+
+      <p style="font-size: 0.85rem; opacity: 0.5; margin-bottom: 1rem;">🎯 推荐人数：6人 | ⏱ 时长：3-4小时 | 🏆 难度：⭐⭐⭐</p>
+
+      <h4 style="opacity: 0.8; margin-bottom: 0.8rem;">🎭 可选角色</h4>
+      <div class="script-characters">
+        <div class="script-char">
+          <div class="char-icon">👨‍⚖️</div>
+          <div class="char-name">程家大少</div>
+          <div class="char-desc">继承者·城府深</div>
+        </div>
+        <div class="script-char">
+          <div class="char-icon">👩‍🎨</div>
+          <div class="char-name">留洋二小姐</div>
+          <div class="char-desc">新潮·秘密多</div>
+        </div>
+        <div class="script-char">
+          <div class="char-icon">👴</div>
+          <div class="char-name">老管家</div>
+          <div class="char-desc">忠仆·知内情</div>
+        </div>
+        <div class="script-char">
+          <div class="char-icon">👩‍💼</div>
+          <div class="char-name">神秘访客</div>
+          <div class="char-desc">不速之客·来者不善</div>
+        </div>
+        <div class="script-char">
+          <div class="char-icon">👮</div>
+          <div class="char-name">县衙探长</div>
+          <div class="char-desc">办案·暗查</div>
+        </div>
+        <div class="script-char">
+          <div class="char-icon">🧙‍♀️</div>
+          <div class="char-name">算命先生</div>
+          <div class="char-desc">江湖·知天命</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="#" class="book-btn">🎯 在线组队</a>
+        <a href="#" class="book-btn" style="background: linear-gradient(135deg, #C9A84C, #A8883A);">📥 下载剧本</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 新建好物 · 文创电商 ====== -->
+<section class="section section-alt" id="shop">
+  <div class="section-title animate-in">
+    <h2>🛍️ 新建好物 · 文创电商</h2>
+    <p>把新建的文化带回家——每一件文创都是一个故事</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-md);">
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">📦</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">海昏侯考古盲盒</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">随机出土一件「文物」微缩模型</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥68</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🍦</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">马蹄金雪糕</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">海昏侯标志性文物造型</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥25</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🪷</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">万寿宫祈福香囊</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">手工刺绣，内有平安符</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥38</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🐟</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">雁鱼灯铜书签</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">海昏侯出土文物·雁鱼灯造型</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥29</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">👘</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">汉服配饰盲盒</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">发簪/团扇/玉佩随机</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥45</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+    <div class="shop-item" style="background: var(--white); box-shadow: var(--shadow); padding: 1.5rem; border-radius: var(--radius-lg); cursor: pointer; transition: var(--transition);">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎴</div>
+      <div style="font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem;">新建景点集章册</div>
+      <div style="font-size: 0.8rem; color: var(--text-mid); margin-bottom: 0.5rem;">12大景区打卡集章</div>
+      <div style="color: var(--orange-dark); font-weight: 700; font-size: 1.2rem;">¥32</div>
+      <button class="btn btn-orange" style="padding: 0.4rem 1.2rem; font-size: 0.8rem; margin-top: 0.5rem;">加入购物车</button>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 夜新建地图 ====== -->
+<section class="section" id="night">
+  <div class="section-title animate-in">
+    <h2>🌃 夜新建地图</h2>
+    <p>专属夜间消费指南——点亮新建的璀璨夜色</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md);">
+    <div class="night-spot animate-in" style="padding: 2rem; text-align: left;">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 2.5rem;">🏮</span>
+        <div>
+          <div style="font-size: 1.1rem; font-weight: 600;">万寿宫非遗夜市</div>
+          <div style="font-size: 0.85rem; opacity: 0.6;">⏰ 17:00 - 22:00</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; opacity: 0.7;">
+        非遗手工艺品、传统小吃、民间技艺表演……灯火阑珊处，遇见最地道的南昌味。
+      </p>
+      <div style="display: flex; gap: 0.3rem; margin-top: 0.8rem; flex-wrap: wrap;">
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🔥 糖画</span>
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🔥 南昌炒粉</span>
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🔥 采茶戏</span>
+      </div>
+    </div>
+    <div class="night-spot animate-in" style="padding: 2rem; text-align: left; background: linear-gradient(135deg, #1a1a2e, #3d1a4e);">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 2.5rem;">🍜</span>
+        <div>
+          <div style="font-size: 1.1rem; font-weight: 600;">新建美食街</div>
+          <div style="font-size: 0.85rem; opacity: 0.6;">⏰ 18:00 - 02:00</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; opacity: 0.7;">
+        大塘东坡肉、鄱阳湖鱼头、藜蒿炒腊肉……赣鄱美食的深夜食堂。
+      </p>
+      <div style="display: flex; gap: 0.3rem; margin-top: 0.8rem; flex-wrap: wrap;">
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🍖 东坡肉</span>
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🐟 鱼头煲</span>
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🥬 藜蒿</span>
+      </div>
+    </div>
+    <div class="night-spot animate-in" style="padding: 2rem; text-align: left; background: linear-gradient(135deg, #0f3460, #1a5276);">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 2.5rem;">🎵</span>
+        <div>
+          <div style="font-size: 1.1rem; font-weight: 600;">赣江夜游</div>
+          <div style="font-size: 0.85rem; opacity: 0.6;">⏰ 19:00 - 21:00</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; opacity: 0.7;">
+        泛舟赣江，两岸灯火璀璨。赏一江两岸灯光秀，听一段南昌老故事。
+      </p>
+      <div style="display: flex; gap: 0.3rem; margin-top: 0.8rem; flex-wrap: wrap;">
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🚢 游船</span>
+        <span style="padding: 0.2rem 0.6rem; background: rgba(255,255,255,0.1); border-radius: 50px; font-size: 0.75rem;">🎆 灯光秀</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>🏛️ 新建大观</h3>
+      <p>新建区全域智慧文旅平台</p>
+    </div>
+    <div class="footer-links">
+      <h4>探索</h4>
+      <a href="routes.html">珠链新游</a>
+      <a href="festivals.html">造节新声</a>
+      <a href="immerse.html">沉浸新境</a>
+      <a href="explore.html">风向新标</a>
+    </div>
+    <div class="footer-links">
+      <h4>服务</h4>
+      <a href="#">一卡通购买</a>
+      <a href="#">交通接驳</a>
+      <a href="#">游客咨询</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 新建大观 · 全域智慧文旅平台</span>
+    <span>⚡ 星月神话工作室 出品</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

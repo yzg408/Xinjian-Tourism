@@ -128,6 +128,30 @@
   <a href="#traffic">🚌 智慧管家</a>
 </div>
 
+<!-- ====== 景点探索（动态数据） ====== -->
+<section class="section" id="explore-spots">
+  <div class="section-title animate-in">
+    <h2>⛰️ 景点探索</h2>
+    <p>发现新建区的精彩景点，搜索或按分类筛选</p>
+  </div>
+
+  <!-- 搜索栏 -->
+  <div class="animate-in" style="max-width:520px; margin:0 auto var(--space-md); display:flex; gap:0.5rem;">
+    <input type="text" id="spot-search-input" placeholder="🔍 搜索景点名称…" style="flex:1; padding:0.7rem 1rem; border:1px solid var(--border-light); border-radius:var(--radius-sm); font-size:0.9rem; outline:none; background:var(--white);">
+    <button id="spot-search-btn" class="btn btn-primary" style="white-space:nowrap;">搜索</button>
+  </div>
+
+  <!-- 分类筛选按钮 -->
+  <div id="explore-filter-bar" class="animate-in" style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; margin-bottom:var(--space-md);">
+    <button class="filter-btn active" data-category="" style="padding:0.4rem 1rem; border-radius:50px; border:1px solid var(--border-light); background:var(--white); cursor:pointer; font-size:0.85rem; transition:var(--transition);">🏷️ 全部</button>
+  </div>
+
+  <!-- 景点网格 -->
+  <div id="explore-spots-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:var(--space-md);">
+    <!-- 由脚本动态填充 -->
+  </div>
+</section>
+
 <!-- ====== KOL 体验官日志 ====== -->
 <section class="section" id="kol">
   <div class="section-title animate-in">
@@ -222,11 +246,12 @@
     <p>从出发到返程，智慧服务全程陪伴</p>
   </div>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
-    <!-- 交通接驳 -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md);">
+    <!-- 交通接驳（动态数据） -->
     <div class="smart-section animate-in">
       <h3>🚍 交通接驳</h3>
-      <div class="traffic-route">
+      <div class="traffic-route" id="explore-traffic-list">
+        <!-- 由脚本动态填充 -->
         <div class="traffic-item">
           <div class="ti-icon" style="background: rgba(46,134,171,0.12);">🚄</div>
           <div class="ti-detail">
@@ -298,6 +323,38 @@
         </div>
       </div>
     </div>
+
+    <!-- 住宿推荐（动态数据） -->
+    <div class="smart-section animate-in">
+      <h3>🏡 住宿推荐</h3>
+      <div id="explore-lodging-list" style="display:flex; flex-direction:column; gap:0.6rem;">
+        <!-- 由脚本动态填充 -->
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(201,168,76,0.12);">🏨</div>
+          <div class="ti-detail">
+            <div class="ti-name">海昏侯主题酒店</div>
+            <div class="ti-time">距遗址公园500m · 汉韵风格</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(201,168,76,0.1); color: var(--gold-dark);">⭐ 推荐</span>
+        </div>
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(46,134,171,0.12);">🏡</div>
+          <div class="ti-detail">
+            <div class="ti-name">南矶山湿地民宿</div>
+            <div class="ti-time">观鸟核心区 · 湖景房</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(34,197,94,0.1); color: #16A34A;">✅ 可订</span>
+        </div>
+        <div class="traffic-item">
+          <div class="ti-icon" style="background: rgba(232,115,74,0.12);">⛺</div>
+          <div class="ti-detail">
+            <div class="ti-name">厚田沙漠星空帐篷</div>
+            <div class="ti-time">沙漠露营区 · 含篝火晚会</div>
+          </div>
+          <span class="ti-badge" style="background: rgba(234,179,8,0.1); color: #CA8A04;">🔥 热门</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- SOS 一键救援 -->
@@ -343,5 +400,174 @@
 
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ============================================
+   新建大观 · explore.html 动态数据加载
+   ============================================ */
+document.addEventListener('DOMContentLoaded', async function() {
+  // 全局状态
+  let currentCategory = '';
+  let currentSearch = '';
+
+  // ===== 1. 加载分类筛选按钮 =====
+  async function loadCategories() {
+    const bar = document.getElementById('explore-filter-bar');
+    if (!bar) return;
+    try {
+      const categories = await api.getCategories();
+      // 保留第一个"全部"按钮，添加分类按钮
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.category = cat;
+        btn.textContent = cat;
+        btn.style.cssText = 'padding:0.4rem 1rem; border-radius:50px; border:1px solid var(--border-light); background:var(--white); cursor:pointer; font-size:0.85rem; transition:var(--transition);';
+        bar.appendChild(btn);
+      });
+      // 分类按钮点击事件
+      bar.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          bar.querySelectorAll('.filter-btn').forEach(b => {
+            b.style.background = 'var(--white)';
+            b.style.color = 'var(--text-dark)';
+            b.style.borderColor = 'var(--border-light)';
+          });
+          this.style.background = 'var(--gold)';
+          this.style.color = '#fff';
+          this.style.borderColor = 'var(--gold-dark)';
+          currentCategory = this.dataset.category;
+          loadSpots();
+        });
+      });
+      // 默认激活"全部"
+      const allBtn = bar.querySelector('[data-category=""]');
+      if (allBtn) {
+        allBtn.style.background = 'var(--gold)';
+        allBtn.style.color = '#fff';
+        allBtn.style.borderColor = 'var(--gold-dark)';
+      }
+    } catch (e) {
+      console.warn('⚠️ 加载分类失败:', e.message);
+    }
+  }
+
+  // ===== 2. 加载景点列表 =====
+  async function loadSpots() {
+    const grid = document.getElementById('explore-spots-grid');
+    if (!grid) return;
+    try {
+      const params = {};
+      if (currentCategory) params.category = currentCategory;
+      if (currentSearch) params.search = currentSearch;
+      const spots = await api.getSpots(params);
+      if (!spots || spots.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:2rem; color:var(--text-mid);">😕 没有找到匹配的景点</div>';
+        return;
+      }
+      grid.innerHTML = spots.map(spot => `
+        <div class="animate-in" style="background:var(--white); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); transition:var(--transition);">
+          <div style="background:linear-gradient(135deg, var(--gold), var(--gold-dark)); padding:1.5rem; text-align:center; font-size:2.5rem; position:relative;">
+            <span style="position:absolute; top:0.5rem; right:0.5rem; background:rgba(255,255,255,0.9); padding:0.2rem 0.6rem; border-radius:50px; font-size:0.75rem; color:var(--gold-dark);">★ ${spot.rating || 'N/A'}</span>
+            🌄
+          </div>
+          <div style="padding:1.2rem;">
+            <span style="display:inline-block; padding:0.2rem 0.6rem; background:rgba(201,168,76,0.12); color:var(--gold-dark); border-radius:50px; font-size:0.75rem; margin-bottom:0.5rem;">${spot.category || '景点'}</span>
+            <h3 style="font-size:1.05rem; margin-bottom:0.4rem;">${spot.name}</h3>
+            <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:0.8rem; line-height:1.5;">${(spot.description || '').slice(0, 80)}${(spot.description || '').length > 80 ? '…' : ''}</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text-light);">
+              <span>⏰ ${spot.opening_hours || '暂无'}</span>
+              <span style="font-weight:600; color:var(--gold-dark);">${spot.ticket_price || '免费'}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    } catch (e) {
+      console.warn('⚠️ 加载景点失败，保留静态内容:', e.message);
+    }
+  }
+
+  // ===== 3. 搜索功能 =====
+  const searchInput = document.getElementById('spot-search-input');
+  const searchBtn = document.getElementById('spot-search-btn');
+  if (searchInput && searchBtn) {
+    function doSearch() {
+      currentSearch = searchInput.value.trim();
+      loadSpots();
+    }
+    searchBtn.addEventListener('click', doSearch);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  }
+
+  // ===== 4. 加载交通数据（使用路线 API） =====
+  async function loadTraffic() {
+    const container = document.getElementById('explore-traffic-list');
+    if (!container) return;
+    try {
+      const routes = await api.getRoutes({ featured: 'true' });
+      if (routes && routes.length > 0) {
+        container.innerHTML = routes.slice(0, 4).map((route, i) => {
+          const icons = ['🚄', '✈️', '🚇', '🚌'];
+          const badges = ['直达', '直达', '换乘', '推荐'];
+          const badgeColors = ['rgba(46,134,171,0.1)', 'rgba(46,134,171,0.1)', 'rgba(201,168,76,0.1)', 'rgba(46,134,171,0.1)'];
+          const badgeTextColors = ['var(--blue)', 'var(--blue)', 'var(--gold-dark)', 'var(--blue)'];
+          const idx = i % icons.length;
+          return `
+            <div class="traffic-item">
+              <div class="ti-icon" style="background:rgba(46,134,171,0.12);">${icons[idx]}</div>
+              <div class="ti-detail">
+                <div class="ti-name">${route.name}</div>
+                <div class="ti-time">${route.description ? route.description.slice(0, 30) : (route.duration || '推荐路线')}</div>
+              </div>
+              <span class="ti-badge" style="background:${badgeColors[idx]}; color:${badgeTextColors[idx]};">${badges[idx]}</span>
+            </div>
+          `;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('⚠️ 加载交通数据失败，保留静态内容:', e.message);
+    }
+  }
+
+  // ===== 5. 加载住宿数据 =====
+  async function loadLodging() {
+    const container = document.getElementById('explore-lodging-list');
+    if (!container) return;
+    try {
+      // 获取景点数据用作住宿推荐
+      const spots = await api.getSpots({ limit: 6 });
+      if (spots && spots.length >= 3) {
+        container.innerHTML = spots.slice(0, 3).map((spot, i) => {
+          const icons = ['🏨', '🏡', '⛺'];
+          const badges = ['⭐ 推荐', '✅ 可订', '🔥 热门'];
+          const badgeColors = ['rgba(201,168,76,0.1)', 'rgba(34,197,94,0.1)', 'rgba(234,179,8,0.1)'];
+          const badgeTextColors = ['var(--gold-dark)', '#16A34A', '#CA8A04'];
+          const iconColors = ['rgba(201,168,76,0.12)', 'rgba(46,134,171,0.12)', 'rgba(232,115,74,0.12)'];
+          const desc = spot.description ? spot.description.slice(0, 20) : (spot.category || '特色住宿');
+          return `
+            <div class="traffic-item">
+              <div class="ti-icon" style="background:${iconColors[i]};">${icons[i]}</div>
+              <div class="ti-detail">
+                <div class="ti-name">${spot.name}</div>
+                <div class="ti-time">${desc}${desc.length >= 20 ? '…' : ''}</div>
+              </div>
+              <span class="ti-badge" style="background:${badgeColors[i]}; color:${badgeTextColors[i]};">${badges[i]}</span>
+            </div>
+          `;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('⚠️ 加载住宿数据失败，保留静态内容:', e.message);
+    }
+  }
+
+  // ===== 启动所有数据加载 =====
+  await Promise.all([
+    loadCategories(),
+    loadSpots(),
+    loadTraffic(),
+    loadLodging()
+  ]);
+});
+</script>
 </body>
 </html>

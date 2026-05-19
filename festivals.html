@@ -10,6 +10,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* 动态活动卡片 */
+    .festival-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+    .festival-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .festival-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .festival-card-header {
+      padding: 1.2rem 1.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .festival-card-header .card-emoji {
+      font-size: 1.8rem;
+    }
+    .festival-card-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .festival-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+    .festival-card-body .card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+    .festival-card-body .card-meta span i {
+      width: 1.2rem;
+      margin-right: 0.3rem;
+    }
+    .festival-card-body .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+    .festival-card-body .card-countdown {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--orange);
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 0.5rem;
+      padding-top: 0.8rem;
+    }
     .live-cam {
       background: #1a1a2e;
       border-radius: var(--radius-lg);
@@ -158,6 +221,17 @@
   <a href="#poyang">🦩 鄱阳观鸟季</a>
   <a href="#houtian">🌟 厚田星空节</a>
 </div>
+
+<!-- ====== 动态活动日历 ====== -->
+<section class="section" id="festival-calendar">
+  <div class="section-title animate-in">
+    <h2>📅 最新活动</h2>
+    <p>精彩活动，不容错过——一键了解活动详情与倒计时</p>
+  </div>
+  <div class="festival-cards" id="festival-cards">
+    <!-- 由 API 动态填充 -->
+  </div>
+</section>
 
 <!-- ====== 海汉文化节 ====== -->
 <section class="section" id="haihan">
@@ -395,5 +469,90 @@
 
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ============================================
+   造节新声 — 动态活动卡片加载
+   ============================================ */
+(function() {
+  const COLORS = [
+    'linear-gradient(135deg, #C9A84C, #A8883A)',
+    'linear-gradient(135deg, #2E86AB, #1B5E7A)',
+    'linear-gradient(135deg, #8B5CF6, #6D28D9)',
+    'linear-gradient(135deg, #E8734A, #C55A2D)',
+    'linear-gradient(135deg, #F59E0B, #D97706)',
+    'linear-gradient(135deg, #10B981, #059669)',
+  ];
+  const EMOJIS = ['🎪', '🎭', '🎵', '🌟', '🦩', '🏛️'];
+
+  async function loadFestivalCards() {
+    const container = document.getElementById('festival-cards');
+    if (!container) return;
+
+    let festivals;
+    try {
+      festivals = await api.getFestivals();
+    } catch (e) {
+      console.warn('⚠️ 活动加载失败，保留静态内容:', e.message);
+      container.innerHTML = '<!-- API 不可用，保留静态内容 -->';
+      return;
+    }
+
+    if (!festivals || festivals.length === 0) {
+      container.innerHTML = '<!-- 暂无活动数据 -->';
+      return;
+    }
+
+    // 生成卡片
+    container.innerHTML = festivals.map((f, i) => {
+      const color = COLORS[i % COLORS.length];
+      const emoji = f.emoji || EMOJIS[i % EMOJIS.length];
+      const cardId = `cd-${i}`;
+      const countdownId = `cd-count-${i}`;
+      const hasDate = f.date && !isNaN(new Date(f.date).getTime());
+
+      return `
+        <div class="festival-card animate-in" id="${cardId}">
+          <div class="festival-card-header" style="background: ${color};">
+            <span class="card-emoji">${emoji}</span>
+            <h3>${escapeHtml(f.name || '')}</h3>
+          </div>
+          <div class="festival-card-body">
+            <div class="card-meta">
+              ${f.date ? `<span><i class="fa-regular fa-calendar"></i> ${f.date}</span>` : ''}
+              ${f.location ? `<span><i class="fa-regular fa-location-dot"></i> ${f.location}</span>` : ''}
+            </div>
+            <div class="card-desc">${escapeHtml(f.description || '')}</div>
+            ${hasDate ? `<div class="card-countdown" id="${countdownId}">⏳ 倒计时计算中...</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // 初始化倒计时
+    festivals.forEach((f, i) => {
+      if (f.date && !isNaN(new Date(f.date).getTime())) {
+        const countdownId = `cd-count-${i}`;
+        if (typeof initCountdown === 'function') {
+          initCountdown(f.date, countdownId);
+        }
+      }
+    });
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // 在 DOMContentLoaded 之后执行，确保 main.js 已加载
+  if (document.readyState === 'complete') {
+    loadFestivalCards();
+  } else {
+    window.addEventListener('load', loadFestivalCards);
+  }
+})();
+</script>
 </body>
 </html>

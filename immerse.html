@@ -74,6 +74,76 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(139,92,246,0.4);
     }
+
+    /* ====== Dynamic Section: Spot Cards ====== */
+    .spot-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .spot-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .spot-image {
+      height: 160px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1rem;
+      position: relative;
+    }
+    .spot-badge {
+      background: rgba(255,255,255,0.9);
+      color: var(--orange-dark);
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .spot-rating {
+      background: rgba(0,0,0,0.3);
+      color: #FFD700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      backdrop-filter: blur(4px);
+    }
+    .spot-body {
+      padding: 1.2rem 1.2rem 1.5rem;
+    }
+    .spot-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0.3rem 0 0.4rem;
+    }
+    .spot-body p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    .spot-category {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+    .spot-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+    }
+    .spot-price {
+      color: var(--orange-dark);
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -288,6 +358,152 @@
   </div>
 </section>
 
+<!-- ====== 推荐景点 ====== -->
+<section class="section section-alt" id="featured">
+  <div class="section-title animate-in">
+    <h2>🏞️ 推荐景点</h2>
+    <p>精选新建最具人气的必游打卡地</p>
+  </div>
+
+  <div id="featured-spots" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-md);">
+    <div class="spot-card animate-in">
+      <div class="spot-image" style="background: linear-gradient(135deg, #C9A84C, #A8883A);">
+        <span class="spot-badge">🔥 推荐</span>
+        <span class="spot-rating">★ 4.8</span>
+      </div>
+      <div class="spot-body">
+        <span class="spot-category" style="background: rgba(201,168,76,0.12); color: #A8883A;">历史遗址</span>
+        <h3>海昏侯国遗址公园</h3>
+        <p>汉代海昏侯刘贺的封国所在地，出土大量珍贵文物……</p>
+        <div class="spot-meta">
+          <span>⏰ 09:00-17:00</span>
+          <span class="spot-price">¥60</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card animate-in">
+      <div class="spot-image" style="background: linear-gradient(135deg, #2E86AB, #1B5E7A);">
+        <span class="spot-badge">🔥 推荐</span>
+        <span class="spot-rating">★ 4.6</span>
+      </div>
+      <div class="spot-body">
+        <span class="spot-category" style="background: rgba(46,134,171,0.12); color: #1B5E7A;">自然湿地</span>
+        <h3>南矶山湿地</h3>
+        <p>鄱阳湖核心保护区，候鸟天堂，秋冬万鸟齐飞……</p>
+        <div class="spot-meta">
+          <span>⏰ 全天开放</span>
+          <span class="spot-price">免费</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card animate-in">
+      <div class="spot-image" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9);">
+        <span class="spot-badge">✨ 推荐</span>
+        <span class="spot-rating">★ 4.7</span>
+      </div>
+      <div class="spot-body">
+        <span class="spot-category" style="background: rgba(139,92,246,0.12); color: #6D28D9;">祈福圣地</span>
+        <h3>西山万寿宫</h3>
+        <p>江南著名道教宫观，千年祈福圣地，香火鼎盛……</p>
+        <div class="spot-meta">
+          <span>⏰ 08:00-17:30</span>
+          <span class="spot-price">¥25</span>
+        </div>
+      </div>
+    </div>
+    <div class="spot-card animate-in">
+      <div class="spot-image" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+        <span class="spot-badge">🏆 推荐</span>
+        <span class="spot-rating">★ 4.5</span>
+      </div>
+      <div class="spot-body">
+        <span class="spot-category" style="background: rgba(245,158,11,0.12); color: #D97706;">沙漠奇观</span>
+        <h3>厚田沙漠</h3>
+        <p>江南最大的沙漠，体验沙漠越野、滑沙、星空露营……</p>
+        <div class="spot-meta">
+          <span>⏰ 08:30-18:00</span>
+          <span class="spot-price">¥50</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 近期活动 ====== -->
+<section class="section" id="events">
+  <div class="section-title animate-in">
+    <h2>🎪 近期活动</h2>
+    <p>不容错过的精彩节庆与主题活动</p>
+  </div>
+
+  <div id="featured-festivals" class="festival-grid">
+    <div class="festival-card animate-in">
+      <div class="festival-header" style="background: linear-gradient(135deg, #C9A84C, #A8883A);">
+        <div class="festival-icon">🏮</div>
+        <h3>海昏汉韵文化节</h3>
+        <p>穿越千年 · 梦回大汉</p>
+      </div>
+      <div class="festival-body">
+        <div class="festival-features">
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(201,168,76,0.12);">📅</div>
+            <div class="ff-text">
+              <h4>活动时间</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">2026年10月1日 - 10月7日</p>
+            </div>
+          </div>
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(201,168,76,0.12);">📍</div>
+            <div class="ff-text">
+              <h4>活动地点</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">海昏侯国遗址公园</p>
+            </div>
+          </div>
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(201,168,76,0.12);">🎯</div>
+            <div class="ff-text">
+              <h4>活动亮点</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">汉服游园、文物特展、汉礼体验</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="festival-card animate-in">
+      <div class="festival-header" style="background: linear-gradient(135deg, #2E86AB, #1B5E7A);">
+        <div class="festival-icon">🦩</div>
+        <h3>南矶山观鸟节</h3>
+        <p>万鸟归巢 · 自然之约</p>
+      </div>
+      <div class="festival-body">
+        <div class="festival-features">
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(46,134,171,0.12);">📅</div>
+            <div class="ff-text">
+              <h4>活动时间</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">2026年11月 - 2027年2月</p>
+            </div>
+          </div>
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(46,134,171,0.12);">📍</div>
+            <div class="ff-text">
+              <h4>活动地点</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">南矶山湿地自然保护区</p>
+            </div>
+          </div>
+          <div class="festival-feature">
+            <div class="ff-icon" style="background: rgba(46,134,171,0.12);">🎯</div>
+            <div class="ff-text">
+              <h4>活动亮点</h4>
+              <p style="font-size:0.85rem; color:var(--text-mid);">专业观鸟导览、摄影大赛、自然课堂</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -317,5 +533,70 @@
 
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ===========================
+   沉浸新境 · 动态数据加载
+   =========================== */
+document.addEventListener('DOMContentLoaded', async () => {
+  // 加载推荐景点 — 失败则保留静态内容
+  try {
+    const spots = await api.getSpots({ featured: 'true', limit: 4 });
+    const spotsContainer = document.getElementById('featured-spots');
+    if (spotsContainer && Array.isArray(spots) && spots.length) {
+      spotsContainer.innerHTML = spots.map(spot => `
+        <div class="spot-card animate-in">
+          <div class="spot-image" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
+            <span class="spot-badge">🔥 推荐</span>
+            <span class="spot-rating">★ ${spot.rating || '4.5'}</span>
+          </div>
+          <div class="spot-body">
+            <span class="spot-category" style="background: rgba(201,168,76,0.12); color: var(--gold-dark);">${spot.category || '景点'}</span>
+            <h3>${spot.name}</h3>
+            <p>${(spot.description || '').slice(0, 60)}${spot.description?.length > 60 ? '……' : ''}</p>
+            <div class="spot-meta">
+              <span>⏰ ${spot.opening_hours || '暂无'}</span>
+              <span class="spot-price">${spot.ticket_price || '免费'}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    console.warn('⚠️ 加载推荐景点失败，保留静态内容:', e.message);
+  }
+
+  // 加载近期活动 — 失败则保留静态内容
+  try {
+    const festivals = await api.getFestivals();
+    const festContainer = document.getElementById('featured-festivals');
+    if (festContainer && Array.isArray(festivals) && festivals.length) {
+      festContainer.innerHTML = festivals.map(f => `
+        <div class="festival-card animate-in">
+          <div class="festival-header" style="background: linear-gradient(135deg, ${f.bgFrom || '#C9A84C'}, ${f.bgTo || '#A8883A'});">
+            <div class="festival-icon">${f.emoji || '🎪'}</div>
+            <h3>${f.name}</h3>
+            <p>${f.subtitle || ''}</p>
+          </div>
+          <div class="festival-body">
+            <div class="festival-features">
+              ${(f.features || f.highlights || []).map(item => `
+                <div class="festival-feature">
+                  <div class="ff-icon" style="background: rgba(201,168,76,0.12);">${item.icon || '📅'}</div>
+                  <div class="ff-text">
+                    <h4>${item.title || ''}</h4>
+                    <p style="font-size:0.85rem; color:var(--text-mid);">${item.desc || item.content || ''}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    console.warn('⚠️ 加载活动失败，保留静态内容:', e.message);
+  }
+});
+</script>
 </body>
 </html>

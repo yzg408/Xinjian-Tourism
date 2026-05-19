@@ -58,6 +58,14 @@
     <button class="tag-btn" data-tag="祈福">🙏 祈福客</button>
   </div>
 
+  <!-- 分类筛选 -->
+  <div class="route-filters" style="display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+    <button class="filter-btn active" data-filter="all" style="padding:0.5rem 1.5rem; border:2px solid var(--gold); border-radius:50px; background:var(--gold); color:#fff; font-weight:600; cursor:pointer; transition:all 0.3s;">🔄 全部路线</button>
+    <button class="filter-btn" data-filter="一日游" style="padding:0.5rem 1.5rem; border:2px solid var(--gold); border-radius:50px; background:transparent; color:var(--gold-dark); font-weight:600; cursor:pointer; transition:all 0.3s;">☀️ 一日游</button>
+    <button class="filter-btn" data-filter="两日游" style="padding:0.5rem 1.5rem; border:2px solid var(--gold); border-radius:50px; background:transparent; color:var(--gold-dark); font-weight:600; cursor:pointer; transition:all 0.3s;">🌙 两日游</button>
+    <button class="filter-btn" data-filter="深度游" style="padding:0.5rem 1.5rem; border:2px solid var(--gold); border-radius:50px; background:transparent; color:var(--gold-dark); font-weight:600; cursor:pointer; transition:all 0.3s;">🏔️ 深度游</button>
+  </div>
+
   <div class="recommended-routes route-grid">
     <!-- JS renders here -->
   </div>
@@ -103,13 +111,147 @@
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
 <script>
-  // Initial render with "历史" tag active
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.recommended-routes');
-    // Render all routes initially since "历史" is active by default
-    const matched = window.routeData.filter(r => r.tags.includes('历史'));
-    renderRoutes(container, matched.length > 0 ? matched : window.routeData);
-  });
+  (function() {
+    var container = document.querySelector('.recommended-routes');
+
+    // 分类筛选按钮点击
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(function(b) {
+          b.style.background = 'transparent';
+          b.style.color = 'var(--gold-dark)';
+        });
+        this.style.background = 'var(--gold)';
+        this.style.color = '#fff';
+        applyFilters();
+      });
+    });
+
+    function getActiveFilter() {
+      var active = document.querySelector('.filter-btn.active');
+      return active ? active.dataset.filter : 'all';
+    }
+
+    function applyFilters() {
+      var filter = getActiveFilter();
+      var tags = [...document.querySelectorAll('.tag-btn.active')].map(function(b) { return b.dataset.tag; });
+      var routes = window._apiRoutes || window.routeData || [];
+
+      var filtered = routes;
+      // Filter by category (duration)
+      if (filter !== 'all') {
+        if (filter === '深度游') {
+          filtered = filtered.filter(function(r) {
+            var d = (r.duration || '').trim();
+            return d.includes('3') || d.includes('多') || d.includes('深度');
+          });
+        } else if (filter === '一日游') {
+          filtered = filtered.filter(function(r) {
+            var d = (r.duration || '').trim();
+            return d.includes('1') || d === '一日游';
+          });
+        } else if (filter === '两日游') {
+          filtered = filtered.filter(function(r) {
+            var d = (r.duration || '').trim();
+            return d.includes('2') || d === '两日游';
+          });
+        }
+      }
+      // Filter by tags
+      if (tags.length > 0) {
+        filtered = filtered.filter(function(route) {
+          return route.tags && route.tags.some(function(tag) { return tags.indexOf(tag) !== -1; });
+        });
+        if (filtered.length === 0) filtered = routes;
+      }
+
+      renderRouteCards(container, filtered);
+    }
+
+    // 合并 renderRoutes 和 loadRoutes 的逻辑，适配 API 与静态数据
+    function renderRouteCards(el, routes) {
+      if (!el) return;
+      el.innerHTML = routes.map(function(route) {
+        // Support both API format (name, spots) and static format (title, stops)
+        var title = route.name || route.title || '未命名路线';
+        var desc = route.description || '';
+        var duration = route.duration || '1日游';
+        var emoji = route.emoji || '🗺️';
+        var bgFrom = route.bgFrom || 'var(--gold)';
+        var bgTo = route.bgTo || 'var(--gold-dark)';
+        var tagColor = route.tagColor || 'var(--gold)';
+        var spots = route.spots || route.stops || route.spot_names || [];
+        // If spots is an array of strings (spot_names), convert
+        if (spots.length > 0 && typeof spots[0] === 'string') {
+          spots = spots.map(function(s) { return { name: s, icon: '📍', type: '景点', color: 'var(--gold)' }; });
+        }
+
+        return [
+          '<div class="route-card">',
+          '  <div class="route-image" style="background: linear-gradient(135deg, ' + bgFrom + ', ' + bgTo + ');">',
+          '    <span class="route-tag" style="background: ' + tagColor + ';">⏱ ' + duration + '</span>',
+          '    <span style="font-size: 3rem; opacity: 0.6;">' + emoji + '</span>',
+          '  </div>',
+          '  <div class="route-body">',
+          '    <h3>' + title + '</h3>',
+          '    <p>' + desc + '</p>',
+          '    <div class="route-stops">',
+          spots.map(function(spot) {
+            var spotName = spot.name || spot;
+            var spotIcon = spot.icon || '📍';
+            var spotColor = spot.color || 'var(--gold)';
+            var spotType = spot.type || '';
+            var typeBadge = '';
+            if (spotType && (spotType === '美食' || spotType === '住宿')) {
+              typeBadge = '<span style="margin-left:auto; font-size:0.75rem; color:var(--text-light); padding:0.1rem 0.5rem; background:rgba(201,168,76,0.1); border-radius:50px;">' + spotType + '</span>';
+            }
+            return '<div class="route-stop"><div class="route-stop-icon" style="background:' + spotColor + '; color:#fff;">' + spotIcon + '</div><span>' + spotName + '</span>' + typeBadge + '</div>';
+          }).join(''),
+          '    </div>',
+          '    <a href="#" class="feature-link">查看详情 →</a>',
+          '  </div>',
+          '</div>'
+        ].join('\n');
+      }).join('\n');
+    }
+
+    // 加载数据：优先 API，失败保留静态
+    (function loadData() {
+      if (typeof api === 'undefined' || !api.getRoutes) {
+        // API 不可用，直接使用静态数据
+        window._apiRoutes = null;
+        applyFilters();
+        return;
+      }
+      api.getRoutes({ featured: true })
+        .then(function(routes) {
+          window._apiRoutes = routes;
+          // Update duration display to match filter labels
+          applyFilters();
+        })
+        .catch(function(err) {
+          console.warn('⚠️ 路线 API 加载失败，使用静态数据:', err.message);
+          window._apiRoutes = null;
+          applyFilters();
+        });
+    })();
+
+    // 标签点击联动筛选
+    document.querySelectorAll('.tag-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        // main.js 已有 toggle 逻辑，稍后触发筛选
+        setTimeout(applyFilters, 50);
+      });
+    });
+
+    // 覆盖 main.js 中的 generateRecommendations 以使用 API 数据
+    window.generateRecommendations = function(tags) {
+      applyFilters();
+    };
+
+    // 初始以 "历史" 标签渲染
+    // applyFilters already called above after data loads
+  })();
 </script>
 </body>
 </html>

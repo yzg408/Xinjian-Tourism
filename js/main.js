@@ -270,3 +270,100 @@ function initCountdown(targetDate, elementId) {
   update();
   setInterval(update, 60000);
 }
+
+/* ============================================
+   新建大观 · API 数据加载
+   ============================================ */
+
+// 页面加载后自动加载数据
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const health = await api.health();
+    console.log('🏛️ 新建大观 API 已连接:', health.status);
+  } catch (e) {
+    console.warn('⚠️ 后端 API 未连接，使用静态数据:', e.message);
+  }
+
+  // 加载尾部统计数据
+  loadFooterStats();
+});
+
+async function loadFooterStats() {
+  try {
+    const stats = await api.getStats();
+    const el = document.getElementById('footer-stats');
+    if (el) {
+      el.innerHTML = `
+        <span>🏛️ ${stats.scenic_spots} 个景点</span>
+        <span> · </span>
+        <span>🛤️ ${stats.routes} 条路线</span>
+        <span> · </span>
+        <span>🎪 ${stats.festivals} 场活动</span>
+      `;
+    }
+  } catch (e) {
+    // 静默失败，用静态数据
+  }
+}
+
+// 加载推荐景点
+async function loadFeaturedSpots(containerId = 'featured-spots') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  try {
+    const spots = await api.getSpots({ featured: 'true', limit: 4 });
+    container.innerHTML = spots.map(spot => `
+      <div class="spot-card animate-in">
+        <div class="spot-image" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
+          <span class="spot-badge">推荐</span>
+          <span class="spot-rating">★ ${spot.rating}</span>
+        </div>
+        <div class="spot-body">
+          <span class="spot-category" style="background: rgba(201,168,76,0.12); color: var(--gold-dark);">${spot.category}</span>
+          <h3>${spot.name}</h3>
+          <p>${spot.description?.slice(0, 60)}...</p>
+          <div class="spot-meta">
+            <span>⏰ ${spot.opening_hours || '暂无'}</span>
+            <span class="spot-price">${spot.ticket_price}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    console.warn('⚠️ 加载推荐景点失败:', e.message);
+  }
+}
+
+// 加载推荐路线
+async function loadRoutes(containerId = 'route-cards') {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  try {
+    const routes = await api.getRoutes({ featured: 'true' });
+    container.innerHTML = routes.map(route => `
+      <div class="route-card animate-in" onclick="window.location.href='routes.html'">
+        <div class="route-image" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
+          <span class="route-tag" style="background: var(--gold);">⏱ ${route.duration}</span>
+          <span style="font-size: 3rem; opacity: 0.6;">🗺️</span>
+        </div>
+        <div class="route-body">
+          <h3>${route.name}</h3>
+          <p>${route.description?.slice(0, 80)}...</p>
+          <div class="route-stops">
+            ${(route.spots || []).slice(0, 3).map(spot => `
+              <div class="route-stop">
+                <div class="route-stop-icon" style="background: var(--gold); color: #fff;">📍</div>
+                <span>${spot.name}</span>
+              </div>
+            `).join('')}
+          </div>
+          <a href="#" class="feature-link">查看详情 →</a>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    console.warn('⚠️ 加载路线失败:', e.message);
+  }
+}

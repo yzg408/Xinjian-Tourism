@@ -2,7 +2,8 @@
    新建大观 · API 数据访问层
    ============================================ */
 
-const API_BASE = 'http://localhost:8001/api';
+const API_PORT = 8001;
+const API_BASE = `http://${window.location.hostname}:${API_PORT}/api`;
 
 const api = {
   async get(path) {

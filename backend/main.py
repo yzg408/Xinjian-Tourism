@@ -2,9 +2,10 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI, Depends, HTTPException, Query
+from fastapi import FastAPI, Depends, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import Response
 from sqlalchemy.orm import Session
 from typing import List, Optional
 import json, os
@@ -226,7 +227,18 @@ if __name__ == "__main__":
     uvicorn.run("backend.main:app", host="0.0.0.0", port=PORT)
 
 # ===== 静态文件（前端页面，最后注册避免覆盖 API 路由） =====
-import os
+# ===== 静态文件（前端页面，最后注册避免覆盖 API 路由） =====
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "..")
 if os.path.isdir(STATIC_DIR):
     app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
+
+# ===== 防缓存中间件（解决手机浏览器缓存问题） =====
+@app.middleware("http")
+async def no_cache_middleware(request: Request, call_next):
+    response: Response = await call_next(request)
+    path = request.url.path
+    if path.endswith(".html") or path.endswith(".js") or path.endswith(".css"):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response

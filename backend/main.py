@@ -4,9 +4,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from typing import List, Optional
-import json
+import json, os
 
 from backend.database import init_db, get_db, engine
 from backend.models import Base, ScenicSpot, Route, Festival, Feedback, TourPlan
@@ -219,6 +220,13 @@ def get_stats(db: Session = Depends(get_db)):
     }
 
 
+PORT = int(os.environ.get("PORT", 5175))
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=PORT)
+
+# ===== 静态文件（前端页面，最后注册避免覆盖 API 路由） =====
+import os
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "..")
+if os.path.isdir(STATIC_DIR):
+    app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
